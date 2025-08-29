@@ -1,5 +1,7 @@
 {
   "navigation": {
+    "mccs": "MCCs",
+    "mcc": "MCC",
     "dashboards": "لوحات القيادة",
     "crm": "إدارة علاقات العملاء",
     "analytics": "تحليلات",

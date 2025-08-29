@@ -1,5 +1,7 @@
 {
   "navigation": {
+    "mccs": "MCCs",
+    "mcc": "MCC",
     "dashboards": "Tableaux de bord",
     "crm": "GRC",
     "analytics": "Analytique",

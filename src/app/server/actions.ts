@@ -6,6 +6,7 @@
 'use server'
 
 // Data Imports
+import { db as mccData } from '@/fake-db/mccs/mcc'
 import { db as eCommerceData } from '@/fake-db/apps/ecommerce'
 import { db as academyData } from '@/fake-db/apps/academy'
 import { db as vehicleData } from '@/fake-db/apps/logistics'
@@ -16,6 +17,10 @@ import { db as profileData } from '@/fake-db/pages/userProfile'
 import { db as faqData } from '@/fake-db/pages/faq'
 import { db as pricingData } from '@/fake-db/pages/pricing'
 import { db as statisticsData } from '@/fake-db/pages/widgetExamples'
+
+export const getMCCData = async () => {
+  return mccData
+}
 
 export const getEcommerceData = async () => {
   return eCommerceData

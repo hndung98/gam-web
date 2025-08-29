@@ -1,5 +1,7 @@
 {
   "navigation": {
+    "mccs": "MCCs",
+    "mcc": "MCC",
     "dashboards": "Dashboards",
     "crm": "CRM",
     "analytics": "Analytics",
