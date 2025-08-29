@@ -5,7 +5,7 @@ export const db: MCCType = {
   mccData: [
     {
       id: 1,
-      name: 'MCC 1001',
+      name: '879861.boston',
       avatar: '/images/avatars/1.png',
       customer: 'Stanfield Baser',
       customerId: '879861',
@@ -24,7 +24,7 @@ export const db: MCCType = {
     },
     {
       id: 2,
-      name: 'MCC 1002',
+      name: '178408.lycos',
       avatar: '/images/avatars/2.png',
       customer: 'Laurie Dax',
       customerId: '178408',
@@ -43,7 +43,7 @@ export const db: MCCType = {
     },
     {
       id: 3,
-      name: 'MCC 1003',
+      name: '221092.eepurl',
       avatar: '/images/avatars/3.png',
       customer: 'Maxine Kenrick',
       customerId: '221092',
@@ -59,6 +59,63 @@ export const db: MCCType = {
       cids: 20,
       createdAt: '8/30/2025',
       status: 'Inactive'
+    },
+    {
+      id: 4,
+      name: '952795.santos',
+      avatar: '/images/avatars/4.png',
+      customer: 'Min',
+      customerId: '952795',
+      email: 'Min@santos.com',
+      country: 'China',
+      countryFlag: '/images/cards/china.png',
+      countryCode: 'gt',
+      currency: 'USD',
+      timezone: 'GMT+8',
+      connecting: false,
+      type: 'Only me',
+      mccs: 5,
+      cids: 20,
+      createdAt: '8/26/2025',
+      status: 'Active'
+    },
+    {
+      id: 5,
+      name: '735484.santos',
+      avatar: '/images/avatars/5.png',
+      customer: 'Neymar Junior',
+      customerId: '735484',
+      email: 'neymar@santos.com',
+      country: 'Brazil',
+      countryFlag: '/images/cards/brazil.png',
+      countryCode: 'gt',
+      currency: 'USD',
+      timezone: 'GMT+11',
+      connecting: true,
+      type: 'All',
+      mccs: 5,
+      cids: 20,
+      createdAt: '8/30/2025',
+      status: 'Active'
+    },
+    {
+      id: 6,
+      name: '885321.rio',
+      avatar: '/images/avatars/6.png',
+      customer: 'Maria',
+      customerId: '885321',
+      email: 'maria@santos.com',
+      country: 'Brazil',
+      countryFlag: '/images/cards/brazil.png',
+      countryCode: 'gt',
+      currency: 'USD',
+      timezone: 'GMT+11',
+      connecting: true,
+      type: 'All',
+      mccs: 5,
+      cids: 20,
+      createdAt: '8/30/2025',
+      status: 'Active'
     }
   ]
 }
