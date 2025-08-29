@@ -1,5 +1,4 @@
 // React Imports
-import { useState } from 'react'
 
 // MUI Imports
 import Button from '@mui/material/Button'
@@ -11,7 +10,6 @@ import IconButton from '@mui/material/IconButton'
 import InputLabel from '@mui/material/InputLabel'
 import MenuItem from '@mui/material/MenuItem'
 import Select from '@mui/material/Select'
-import Switch from '@mui/material/Switch'
 import TextField from '@mui/material/TextField'
 import Typography from '@mui/material/Typography'
 
@@ -30,18 +28,10 @@ type Props = {
 }
 
 type FormValidateType = {
-  fullName: string
-  email: string
+  name: string
+  customerId: string
+  creditLine: string
   country: string
-}
-
-type FormNonValidateType = {
-  contact: string
-  address1: string
-  address2: string
-  town: string
-  state: string
-  postcode: string
 }
 
 type countryType = {
@@ -57,22 +47,9 @@ export const country: { [key: string]: countryType } = {
   china: { country: 'China' }
 }
 
-// Vars
-const initialData = {
-  contact: '',
-  address1: '',
-  address2: '',
-  town: '',
-  state: '',
-  postcode: ''
-}
-
 const AddMCCDrawer = (props: Props) => {
   // Props
   const { open, handleClose, setData, mccData } = props
-
-  // States
-  const [formData, setFormData] = useState<FormNonValidateType>(initialData)
 
   // Hooks
   const {
@@ -82,8 +59,9 @@ const AddMCCDrawer = (props: Props) => {
     formState: { errors }
   } = useForm<FormValidateType>({
     defaultValues: {
-      fullName: '',
-      email: '',
+      name: '',
+      customerId: '',
+      creditLine: '',
       country: ''
     }
   })
@@ -100,16 +78,14 @@ const AddMCCDrawer = (props: Props) => {
       }
 
       setData([...(mccData ?? []), newData])
-      resetForm({ fullName: '', email: '', country: '' })
-      setFormData(initialData)
+      resetForm({ name: '', customerId: '', creditLine: '', country: '' })
       handleClose()
     }
   }
 
   const handleReset = () => {
     handleClose()
-    resetForm({ fullName: '', email: '', country: '' })
-    setFormData(initialData)
+    resetForm({ name: '', customerId: '', creditLine: '', country: '' })
   }
 
   return (
@@ -122,7 +98,7 @@ const AddMCCDrawer = (props: Props) => {
       sx={{ '& .MuiDrawer-paper': { width: { xs: 300, sm: 400 } } }}
     >
       <div className='flex items-center justify-between p-5'>
-        <Typography variant='h5'>Add a Customer</Typography>
+        <Typography variant='h5'>Create a MCC</Typography>
         <IconButton size='small' onClick={handleReset}>
           <i className='ri-close-line text-2xl' />
         </IconButton>
@@ -131,41 +107,51 @@ const AddMCCDrawer = (props: Props) => {
       <PerfectScrollbar options={{ wheelPropagation: false, suppressScrollX: true }}>
         <div className='p-5'>
           <form onSubmit={handleSubmit(data => onSubmit(data))} className='flex flex-col gap-5'>
-            <Typography color='text.primary' className='font-medium'>
-              Basic Information
-            </Typography>
             <Controller
-              name='fullName'
+              name='name'
               control={control}
               rules={{ required: true }}
               render={({ field }) => (
                 <TextField
                   {...field}
                   fullWidth
-                  label='First Name'
-                  placeholder='John'
-                  {...(errors.fullName && { error: true, helperText: 'This field is required.' })}
+                  label='Name'
+                  placeholder='7354814.examplewebsite.user'
+                  {...(errors.name && { error: true, helperText: 'This field is required.' })}
                 />
               )}
             />
             <Controller
-              name='email'
+              name='customerId'
               control={control}
               rules={{ required: true }}
               render={({ field }) => (
                 <TextField
                   {...field}
                   fullWidth
-                  type='email'
-                  label='Email Address'
-                  placeholder='johndoe@gmail.com'
-                  {...(errors.email && { error: true, helperText: 'This field is required.' })}
+                  label='Customer Id'
+                  placeholder='7354814'
+                  {...(errors.customerId && { error: true, helperText: 'This field is required.' })}
+                />
+              )}
+            />
+            <Controller
+              name='creditLine'
+              control={control}
+              rules={{ required: true }}
+              render={({ field }) => (
+                <TextField
+                  {...field}
+                  fullWidth
+                  label='Credit Line'
+                  placeholder='20000'
+                  {...(errors.creditLine && { error: true, helperText: 'This field is required.' })}
                 />
               )}
             />
             <FormControl fullWidth>
               <InputLabel id='country' error={Boolean(errors.country)}>
-                Country*
+                Country
               </InputLabel>
               <Controller
                 name='country'
@@ -184,72 +170,9 @@ const AddMCCDrawer = (props: Props) => {
               />
               {errors.country && <FormHelperText error>This field is required.</FormHelperText>}
             </FormControl>
-            <Typography color='text.primary' className='font-medium'>
-              Shipping Information
-            </Typography>
-            <TextField
-              fullWidth
-              label='Address Line 1*'
-              name='address1'
-              variant='outlined'
-              value={formData.address1}
-              onChange={e => setFormData({ ...formData, address1: e.target.value })}
-            />
-            <TextField
-              fullWidth
-              label='Address Line 2*'
-              name='address2'
-              variant='outlined'
-              value={formData.address2}
-              onChange={e => setFormData({ ...formData, address2: e.target.value })}
-            />
-            <TextField
-              fullWidth
-              label='Town*'
-              name='town'
-              variant='outlined'
-              value={formData.town}
-              onChange={e => setFormData({ ...formData, town: e.target.value })}
-            />
-            <TextField
-              fullWidth
-              label='State/Province*'
-              name='state'
-              variant='outlined'
-              value={formData.state}
-              onChange={e => setFormData({ ...formData, state: e.target.value })}
-            />
-            <TextField
-              fullWidth
-              label='Post Code*'
-              name='postcode'
-              variant='outlined'
-              value={formData.postcode}
-              onChange={e => setFormData({ ...formData, postcode: e.target.value })}
-            />
-            <TextField
-              label='Mobile Number'
-              type='number'
-              fullWidth
-              placeholder='(397) 294-5153'
-              value={formData.contact}
-              onChange={e => setFormData({ ...formData, contact: e.target.value })}
-            />
-            <div className='flex justify-between'>
-              <div className='flex flex-col items-start gap-1'>
-                <Typography color='text.primary' className='font-medium'>
-                  Use as a billing address?
-                </Typography>
-                <Typography variant='body2'>Please check budget for more info.</Typography>
-              </div>
-              <Switch defaultChecked />
-            </div>
             <div className='flex items-center gap-4'>
-              <Button variant='contained' type='submit'>
+              <Button variant='contained' type='submit' fullWidth>
                 Add
-              </Button>
-              <Button variant='outlined' color='error' type='reset' onClick={handleReset}>
-                Discard
               </Button>
             </div>
           </form>
