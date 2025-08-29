@@ -2,24 +2,23 @@
 import Button from '@mui/material/Button'
 
 // Type Imports
-import type { ChildrenType } from '@core/types'
 import type { Locale } from '@configs/i18n'
+import type { ChildrenType } from '@core/types'
 
 // Layout Imports
+import HorizontalLayout from '@layouts/HorizontalLayout'
 import LayoutWrapper from '@layouts/LayoutWrapper'
 import VerticalLayout from '@layouts/VerticalLayout'
-import HorizontalLayout from '@layouts/HorizontalLayout'
 
 // Component Imports
-import Providers from '@components/Providers'
-import Navigation from '@components/layout/vertical/Navigation'
-import Header from '@components/layout/horizontal/Header'
-import Navbar from '@components/layout/vertical/Navbar'
-import VerticalFooter from '@components/layout/vertical/Footer'
-import HorizontalFooter from '@components/layout/horizontal/Footer'
-import Customizer from '@core/components/customizer'
-import ScrollToTop from '@core/components/scroll-to-top'
 import AuthGuard from '@/hocs/AuthGuard'
+import Providers from '@components/Providers'
+import HorizontalFooter from '@components/layout/horizontal/Footer'
+import Header from '@components/layout/horizontal/Header'
+import VerticalFooter from '@components/layout/vertical/Footer'
+import Navbar from '@components/layout/vertical/Navbar'
+import Navigation from '@components/layout/vertical/Navigation'
+import ScrollToTop from '@core/components/scroll-to-top'
 
 // Config Imports
 import { i18n } from '@configs/i18n'
@@ -67,7 +66,6 @@ const Layout = async (props: ChildrenType & { params: Promise<{ lang: Locale }> 
             <i className='ri-arrow-up-line' />
           </Button>
         </ScrollToTop>
-        <Customizer dir={direction} />
       </AuthGuard>
     </Providers>
   )
