@@ -17,6 +17,10 @@ import TablePagination from '@mui/material/TablePagination'
 import type { TextFieldProps } from '@mui/material/TextField'
 import TextField from '@mui/material/TextField'
 import Typography from '@mui/material/Typography'
+import MenuItem from '@mui/material/MenuItem'
+import Select from '@mui/material/Select'
+import FormControl from '@mui/material/FormControl'
+import InputLabel from '@mui/material/InputLabel'
 
 // Third-party Imports
 import type { RankingInfo } from '@tanstack/match-sorter-utils'
@@ -226,7 +230,14 @@ const MCCListTable = ({ mccData }: { mccData?: MCC[] }) => {
       }),
       columnHelper.accessor('type', {
         header: 'Type',
-        cell: ({ row }) => <Typography color='text.primary'>{row.original.type}</Typography>
+        cell: ({ row }) => (
+          <Chip
+            label={row.original.type}
+            variant='tonal'
+            color={row.original.type === 'All' ? 'info' : 'default'}
+            size='small'
+          />
+        )
       }),
       columnHelper.accessor('mccs', {
         header: 'MCCs',
@@ -359,15 +370,52 @@ const MCCListTable = ({ mccData }: { mccData?: MCC[] }) => {
             placeholder='Search'
             className='max-sm:is-full'
           />
-          <div className='flex gap-4 max-sm:flex-col max-sm:is-full'>
-            <Button
-              variant='outlined'
-              className='max-sm:is-full'
-              color='secondary'
-              startIcon={<i className='ri-upload-2-line' />}
+          <FormControl fullWidth size='small' className='sm:is-[140px] flex-auto max-sm:is-full'>
+            <InputLabel id='connecting-basic-select-outlined-label'>Connecting</InputLabel>
+            <Select
+              label='Connecting'
+              defaultValue=''
+              id='connecting-basic-select-outlined'
+              labelId='connecting-basic-select-outlined-label'
             >
-              Export
-            </Button>
+              <MenuItem value=''>
+                <em>None</em>
+              </MenuItem>
+              <MenuItem value={10}>Connected</MenuItem>
+              <MenuItem value={20}>Not Connected</MenuItem>
+            </Select>
+          </FormControl>
+          <FormControl fullWidth size='small' className='sm:is-[140px] flex-auto max-sm:is-full'>
+            <InputLabel id='type-basic-select-outlined-label'>Type</InputLabel>
+            <Select
+              label='Type'
+              defaultValue=''
+              id='type-basic-select-outlined'
+              labelId='type-basic-select-outlined-label'
+            >
+              <MenuItem value=''>
+                <em>None</em>
+              </MenuItem>
+              <MenuItem value={10}>All</MenuItem>
+              <MenuItem value={20}>Only me</MenuItem>
+            </Select>
+          </FormControl>
+          <FormControl fullWidth size='small' className='sm:is-[140px] flex-auto max-sm:is-full'>
+            <InputLabel id='status-basic-select-outlined-label'>Status</InputLabel>
+            <Select
+              label='Status'
+              defaultValue=''
+              id='status-basic-select-outlined'
+              labelId='status-basic-select-outlined-label'
+            >
+              <MenuItem value=''>
+                <em>None</em>
+              </MenuItem>
+              <MenuItem value={10}>Active</MenuItem>
+              <MenuItem value={20}>Inactive</MenuItem>
+            </Select>
+          </FormControl>
+          <div className='flex gap-4 max-sm:flex-col max-sm:is-full'>
             <Button
               variant='contained'
               color='primary'
