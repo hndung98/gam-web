@@ -48,7 +48,7 @@ const RenderExpandIcon = ({ open, transitionDuration }: RenderExpandIconProps) =
 
 const VerticalMenu = ({ dictionary, scrollMenu }: Props) => {
   // Constants
-  const testMode = true
+  const testMode = false
 
   // Hooks
   const theme = useTheme()
@@ -84,10 +84,10 @@ const VerticalMenu = ({ dictionary, scrollMenu }: Props) => {
         renderExpandedMenuItemIcon={{ icon: <i className='ri-circle-fill' /> }}
         menuSectionStyles={menuSectionStyles(verticalNavOptions, theme)}
       >
-        <MenuItem icon={<i className='ri-home-smile-line' />} href={`/${locale}/dashboards`}>
+        <MenuItem icon={<i className='ri-dashboard-line' />} href={`/${locale}/dashboards`}>
           {dictionary['navigation'].dashboards}
         </MenuItem>
-        <MenuItem icon={<i className='ri-folder-keyhole-line' />} href={`/${locale}/mccs`}>
+        <MenuItem icon={<i className='ri-folder-user-line' />} href={`/${locale}/mccs`}>
           {dictionary['navigation'].mccs}
         </MenuItem>
         {!testMode && (
