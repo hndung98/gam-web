@@ -90,7 +90,7 @@ const VerticalMenu = ({ dictionary, scrollMenu }: Props) => {
         <MenuItem icon={<i className='ri-folder-user-line' />} href={`/${locale}/mccs`}>
           {dictionary['navigation'].mccs}
         </MenuItem>
-        {!testMode && (
+        {testMode && (
           <>
             <SubMenu
               label={dictionary['navigation'].dashboards}
