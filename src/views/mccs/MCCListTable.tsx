@@ -175,7 +175,16 @@ const MCCListTable = ({ mccData }: { mccData?: MCC[] }) => {
       },
       columnHelper.accessor('name', {
         header: 'MCC',
-        cell: ({ row }) => <Typography color='text.primary'>{row.original.name}</Typography>
+        cell: ({ row }) => (
+          <Typography
+            component={Link}
+            color='text.primary'
+            href={getLocalizedUrl(`/mccs/${row.original.id}`, locale as Locale)}
+            className='font-medium hover:text-primary'
+          >
+            {row.original.name}
+          </Typography>
+        )
       }),
       columnHelper.accessor('customer', {
         header: 'Owner',
