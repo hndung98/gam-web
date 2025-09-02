@@ -427,6 +427,16 @@ const MCCListTable = ({ mccData }: { mccData?: MCC[] }) => {
           <div className='flex gap-4 max-sm:flex-col max-sm:is-full'>
             <Button
               variant='contained'
+              color='secondary'
+              className='max-sm:is-full'
+              startIcon={<i className='ri-filter-line' />}
+            >
+              Filter
+            </Button>
+          </div>
+          <div className='flex gap-4 max-sm:flex-col max-sm:is-full'>
+            <Button
+              variant='contained'
               color='primary'
               className='max-sm:is-full'
               startIcon={<i className='ri-add-line' />}
