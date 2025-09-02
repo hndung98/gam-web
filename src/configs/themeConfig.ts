@@ -39,6 +39,7 @@ type Footer = {
 export type Config = {
   templateName: string
   homePageUrl: string
+  loginCallbackUrl: string
   settingsCookieName: string
   mode: Mode
   skin: Skin
@@ -56,6 +57,7 @@ export type Config = {
 const themeConfig: Config = {
   templateName: 'Materialize',
   homePageUrl: '/dashboards',
+  loginCallbackUrl: '/login',
   settingsCookieName: 'materialize-mui-next-demo-1',
   mode: 'system', // 'system', 'light', 'dark'
   skin: 'default', // 'default', 'bordered'

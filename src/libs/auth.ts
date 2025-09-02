@@ -1,15 +1,10 @@
 // Third-party Imports
 import CredentialProvider from 'next-auth/providers/credentials'
 import GoogleProvider from 'next-auth/providers/google'
-import { PrismaAdapter } from '@auth/prisma-adapter'
-import { PrismaClient } from '@prisma/client'
 import type { NextAuthOptions } from 'next-auth'
-import type { Adapter } from 'next-auth/adapters'
-
-const prisma = new PrismaClient()
 
 export const authOptions: NextAuthOptions = {
-  adapter: PrismaAdapter(prisma) as Adapter,
+  adapter: undefined,
 
   // ** Configure one or more authentication providers
   // ** Please refer to https://next-auth.js.org/configuration/options#providers for more `providers` options
@@ -100,18 +95,29 @@ export const authOptions: NextAuthOptions = {
 
   // ** Please refer to https://next-auth.js.org/configuration/options#callbacks for more `callbacks` options
   callbacks: {
+    async redirect({ url, baseUrl }) {
+      console.log({ url, baseUrl })
+
+      return '/login' // luôn quay về trang login
+    },
+
     /*
      * While using `jwt` as a strategy, `jwt()` callback will be called before
      * the `session()` callback. So we have to add custom parameters in `token`
      * via `jwt()` callback to make them accessible in the `session()` callback
      */
-    async jwt({ token, user }) {
+    async jwt({ token, user, account }) {
       if (user) {
         /*
          * For adding custom parameters to user in session, we first need to add those parameters
          * in token which then will be available in the `session()` callback
          */
         token.name = user.name
+      }
+
+      if (account) {
+        token.idToken = account.id_token
+        token.accessToken = account.access_token
       }
 
       return token
@@ -121,6 +127,9 @@ export const authOptions: NextAuthOptions = {
         // ** Add custom params to user in session which are added in `jwt()` callback via `token` parameter
         session.user.name = token.name
       }
+
+      session.idToken = token.idToken as string
+      session.accessToken = token.accessToken as string
 
       return session
     }

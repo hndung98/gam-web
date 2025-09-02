@@ -1,35 +1,35 @@
 'use client'
 
 // React Imports
-import { useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 
 // Next Imports
 import Link from 'next/link'
 import { useParams, useRouter, useSearchParams } from 'next/navigation'
 
 // MUI Imports
-import Typography from '@mui/material/Typography'
-import TextField from '@mui/material/TextField'
+import Alert from '@mui/material/Alert'
+import Button from '@mui/material/Button'
+import Checkbox from '@mui/material/Checkbox'
+import Divider from '@mui/material/Divider'
+import FormControlLabel from '@mui/material/FormControlLabel'
 import IconButton from '@mui/material/IconButton'
 import InputAdornment from '@mui/material/InputAdornment'
-import Checkbox from '@mui/material/Checkbox'
-import Button from '@mui/material/Button'
-import FormControlLabel from '@mui/material/FormControlLabel'
-import Divider from '@mui/material/Divider'
-import Alert from '@mui/material/Alert'
+import TextField from '@mui/material/TextField'
+import Typography from '@mui/material/Typography'
 
 // Third-party Imports
-import { signIn } from 'next-auth/react'
-import { Controller, useForm } from 'react-hook-form'
 import { valibotResolver } from '@hookform/resolvers/valibot'
-import { object, minLength, string, email, pipe, nonEmpty } from 'valibot'
-import type { SubmitHandler } from 'react-hook-form'
-import type { InferInput } from 'valibot'
 import classnames from 'classnames'
+import { signIn, useSession } from 'next-auth/react'
+import type { SubmitHandler } from 'react-hook-form'
+import { Controller, useForm } from 'react-hook-form'
+import type { InferInput } from 'valibot'
+import { email, minLength, nonEmpty, object, pipe, string } from 'valibot'
 
 // Type Imports
-import type { Mode } from '@core/types'
 import type { Locale } from '@/configs/i18n'
+import type { Mode } from '@core/types'
 
 // Component Imports
 import Logo from '@components/layout/shared/Logo'
@@ -78,6 +78,33 @@ const Login = ({ mode }: { mode: Mode }) => {
   const { lang: locale } = useParams()
   const { settings } = useSettings()
 
+  const { data: session, status } = useSession()
+  const calledRef = useRef(false)
+
+  const testMode = true
+
+  useEffect(() => {
+    if (!calledRef.current && status === 'authenticated' && session?.idToken) {
+      calledRef.current = true
+
+      if (!testMode)
+        fetch('http://localhost:5000/api/v1/auth/google', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ idToken: session.idToken })
+        })
+          .then(res => res.json())
+          .then(data => {
+            console.log('JWT từ NestJS:', data)
+            localStorage.setItem('access_token', data.access_token)
+
+            router.push('/dashboard')
+          })
+    }
+
+    console.log({ status, session })
+  }, [status, session, router, testMode])
+
   const {
     control,
     handleSubmit,
@@ -121,6 +148,14 @@ const Login = ({ mode }: { mode: Mode }) => {
         setErrorState(error)
       }
     }
+  }
+
+  if (status === 'loading') {
+    return <p>Đang kiểm tra phiên đăng nhập...</p>
+  }
+
+  if (status === 'authenticated') {
+    return <p>Đang xử lý đăng nhập, vui lòng chờ...</p>
   }
 
   return (
