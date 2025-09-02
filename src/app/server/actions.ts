@@ -7,6 +7,7 @@
 
 // Data Imports
 import { db as mccData } from '@/fake-db/mccs/mcc'
+import { db as subAccountsData } from '@/fake-db/mccs/sub-accounts'
 import { db as eCommerceData } from '@/fake-db/apps/ecommerce'
 import { db as academyData } from '@/fake-db/apps/academy'
 import { db as vehicleData } from '@/fake-db/apps/logistics'
@@ -20,6 +21,10 @@ import { db as statisticsData } from '@/fake-db/pages/widgetExamples'
 
 export const getMCCData = async () => {
   return mccData
+}
+
+export const getSubAccountsData = async () => {
+  return subAccountsData
 }
 
 export const getEcommerceData = async () => {
