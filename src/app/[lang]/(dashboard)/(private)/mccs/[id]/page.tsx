@@ -11,6 +11,9 @@ import type { Locale } from '@/configs/i18n'
 // Component Imports
 import MCCDetails from '@/views/mccs/details/MCCDetails'
 
+// Data Imports
+import { getMCCData } from '@/app/server/actions'
+
 // Vars
 const OverViewTab = dynamic(() => import('@/views/mccs/details/overview'))
 const SubAccountsTab = dynamic(() => import('@/views/mccs/details/sub-accounts'))
@@ -23,10 +26,8 @@ const tabContentList = (): { [key: string]: ReactElement } => ({
 export default async function Page(props: { params: Promise<{ id: string; lang: Locale }> }) {
   const params = await props.params
 
-  console.log({ params })
-
-  // const mcc = await getMCCById(params.id)
-  const mcc = {}
+  const mccs = await getMCCData()
+  const mcc = mccs.mccData.find(item => item.id.toString() === params.id)
 
   if (!mcc) notFound()
 
