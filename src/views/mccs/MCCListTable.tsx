@@ -13,14 +13,14 @@ import Card from '@mui/material/Card'
 import CardContent from '@mui/material/CardContent'
 import Checkbox from '@mui/material/Checkbox'
 import Chip from '@mui/material/Chip'
+import FormControl from '@mui/material/FormControl'
+import InputLabel from '@mui/material/InputLabel'
+import MenuItem from '@mui/material/MenuItem'
+import Select from '@mui/material/Select'
 import TablePagination from '@mui/material/TablePagination'
 import type { TextFieldProps } from '@mui/material/TextField'
 import TextField from '@mui/material/TextField'
 import Typography from '@mui/material/Typography'
-import MenuItem from '@mui/material/MenuItem'
-import Select from '@mui/material/Select'
-import FormControl from '@mui/material/FormControl'
-import InputLabel from '@mui/material/InputLabel'
 
 // Third-party Imports
 import type { RankingInfo } from '@tanstack/match-sorter-utils'
@@ -44,7 +44,6 @@ import classnames from 'classnames'
 import type { Customer } from '@/types/apps/ecommerceTypes'
 import type { MCC } from '@/types/mccs/mccTypes'
 import type { Locale } from '@configs/i18n'
-import type { ThemeColor } from '@core/types'
 
 // Component Imports
 import CustomAvatar from '@core/components/mui/Avatar'
@@ -65,29 +64,6 @@ declare module '@tanstack/table-core' {
   interface FilterMeta {
     itemRank: RankingInfo
   }
-}
-
-type PayementStatusType = {
-  text: string
-  color: ThemeColor
-}
-
-type StatusChipColorType = {
-  color: ThemeColor
-}
-
-export const paymentStatus: { [key: number]: PayementStatusType } = {
-  1: { text: 'Paid', color: 'success' },
-  2: { text: 'Pending', color: 'warning' },
-  3: { text: 'Cancelled', color: 'secondary' },
-  4: { text: 'Failed', color: 'error' }
-}
-
-export const statusChipColor: { [key: string]: StatusChipColorType } = {
-  Delivered: { color: 'success' },
-  'Out for Delivery': { color: 'primary' },
-  'Ready to Pickup': { color: 'info' },
-  Dispatched: { color: 'warning' }
 }
 
 type MCCTypeWithAction = MCC & {
