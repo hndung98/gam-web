@@ -95,12 +95,6 @@ export const authOptions: NextAuthOptions = {
 
   // ** Please refer to https://next-auth.js.org/configuration/options#callbacks for more `callbacks` options
   callbacks: {
-    async redirect({ url, baseUrl }) {
-      console.log({ url, baseUrl })
-
-      return '/login' // luôn quay về trang login
-    },
-
     /*
      * While using `jwt` as a strategy, `jwt()` callback will be called before
      * the `session()` callback. So we have to add custom parameters in `token`
